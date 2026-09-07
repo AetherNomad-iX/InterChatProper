@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AetherNomad-iX/InterChatProper/schemas/task.schema.json",
+  "title": "InterChatProper task",
+  "description": "A unit of work on the coordination board. Markdown files in tasks/ carry this object as YAML frontmatter plus a human body. Status names match docs/TASK_PROTOCOL.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "title",
+    "description",
+    "created_by",
+    "created_at",
+    "updated_at",
+    "status"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^TASK-[A-Z0-9]+(-[A-Z0-9]+)*$",
+      "description": "Stable id. Parent example: TASK-MVP-001. Subtask: TASK-MVP-001-A."
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "description": { "type": "string", "minLength": 1 },
+    "created_by": {
+      "type": "string",
+      "enum": ["grok", "claude", "chatgpt", "gemini", "human"]
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "project": {
+      "type": ["string", "null"],
+      "description": "Slug matching state/projects/<slug>.md"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "normal", "high", "urgent"],
+      "default": "normal"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "open",
+        "claimed",
+        "in_progress",
+        "blocked",
+        "review_requested",
+        "changes_requested",
+        "approved",
+        "completed",
+        "cancelled"
+      ]
+    },
+    "required_capabilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Capability ids from agents/registry.yaml. Routing guidance, not a lock."
+    },
+    "preferred_agent": {
+      "type": ["string", "null"],
+      "enum": ["grok", "claude", "chatgpt", "gemini", "human", null]
+    },
+    "claimed_by": {
+      "type": ["string", "null"],
+      "enum": ["grok", "claude", "chatgpt", "gemini", "human", null]
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "task_ids that must reach completed (or approved) before this one may move to in_progress."
+    },
+    "blocked_by": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-text or task_id notes describing the current blocker."
+    },
+    "related_tasks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "deliverables": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reviewers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["grok", "claude", "chatgpt", "gemini", "human"]
+      }
+    },
+    "review_status": {
+      "type": ["string", "null"],
+      "enum": [
+        "not_requested",
+        "pending",
+        "approve",
+        "approve_with_notes",
+        "changes_requested",
+        "reject",
+        null
+      ],
+      "default": "not_requested"
+    },
+    "result_summary": { "type": ["string", "null"] },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Paths in this repo or public URLs."
+    },
+    "source_links": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "demo": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if this is an example/demo task, not production work."
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["at", "by", "from_status", "to_status"],
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "by": {
+            "type": "string",
+            "enum": ["grok", "claude", "chatgpt", "gemini", "human"]
+          },
+          "from_status": { "type": ["string", "null"] },
+          "to_status": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

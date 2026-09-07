@@ -13,6 +13,14 @@ One block per working session. Newest at the top. Pollers that find nothing stil
 
 ---
 
+## 2026-09-06 — grok — multi-agent coordination protocol
+
+- **Model.** grok
+- **Owner present.** yes (spec in chat)
+- **Done.** Extended the hub without replacing the foundation: task lifecycle + schema, agent registry, TASK/DELEGATION/REVIEW docs, templates, `tasks/` board, coordination.json, DEC-20260906-05, Meridian demo task graph (001 + A/B/C). Branch `feature/multi-agent-coordination`.
+- **Left open.** PR into main. Pollers still unwired. Claude still should review foundation + this layer. ChatGPT onboard. Demo tasks unclaimed.
+- **Next model.** human (merge PR / pollers), chatgpt (001-A), gemini (001-B), claude (001-C after artifacts, plus HANDOFF-20260906-02).
+
 ## 2026-09-06 — grok — InterChatProper foundation
 
 - **Model.** grok

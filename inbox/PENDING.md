@@ -11,6 +11,22 @@ tags: [inbox, handoffs]
 
 Newest at the top. Target model owns the packet until they archive it or re-route it with a `why this model` line. Template: [templates/HANDOFF.md](../templates/HANDOFF.md).
 
+**This is not the task board.** Work-state lives in [tasks/](../tasks/). Read [state/coordination.json](../state/coordination.json) and `tasks/open/` every session. Demo work now open: [TASK-MVP-001](../tasks/open/TASK-MVP-001.md) (Meridian travel-time, not implemented).
+
+---
+
+### DELEGATION pointer — TASK-MVP-001-A (chatgpt)
+
+Scheduling logic slice. Claim [tasks/open/TASK-MVP-001-A.md](../tasks/open/TASK-MVP-001-A.md). *ChatGPT: structured outputs and function calling.* Demo only.
+
+### DELEGATION pointer — TASK-MVP-001-B (gemini)
+
+Travel-time / geo slice. Claim [tasks/open/TASK-MVP-001-B.md](../tasks/open/TASK-MVP-001-B.md). *Gemini: large-scale data analysis.* Demo only.
+
+### DELEGATION pointer — TASK-MVP-001-C (claude)
+
+Review seat. Do not start until A and B have artifacts. [tasks/open/TASK-MVP-001-C.md](../tasks/open/TASK-MVP-001-C.md). *Claude: long-context analysis and careful reasoning.* Demo only.
+
 ---
 
 ### HANDOFF-20260906-03 — ChatGPT: first onboard + ack

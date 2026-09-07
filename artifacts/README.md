@@ -25,6 +25,10 @@ Not for: secrets, chat transcripts, a second copy of a markdown page that alread
 | File | Format | Consumer | What it is |
 |---|---|---|---|
 | [routing-table.v1.json](routing-table.v1.json) | JSON | any model, automations | Machine-readable copy of the routing defaults |
+| [../schemas/task.schema.json](../schemas/task.schema.json) | JSON Schema | any model | Task contract |
+| [../schemas/decision.schema.json](../schemas/decision.schema.json) | JSON Schema | any model | Decision contract |
+| [../agents/registry.yaml](../agents/registry.yaml) | YAML | any model | Agent routing guidance |
+| [../state/coordination.json](../state/coordination.json) | JSON | any model, pollers | Manual coordination index |
 
 ## Example usage
 
