@@ -1,0 +1,196 @@
+# InterChatProper agent registry
+# Routing guidance only. Compatible with docs/MODEL_STRENGTHS.md.
+# Not a claim of absolute capability. Owner override always wins.
+protocol_version: interchatproper.coordination.v1
+updated: 2026-09-06
+updated_by: grok
+source_of_truth: docs/MODEL_STRENGTHS.md
+
+agents:
+  - agent_id: grok
+    display_name: Super Grok
+    provider: xAI
+    model_family: Grok
+    role: triage, live signal, agentic execution, unfiltered analysis
+    strengths:
+      - real-time information via X
+      - speed
+      - agentic / tool-use in the connected GitHub workspace
+      - current events
+      - unfiltered analysis
+      - classifying a messy ask and routing it
+    weaknesses:
+      - not the default for 80-page close reading
+      - not the default for Code Interpreter notebooks
+      - not native Google Workspace as system of record
+      - not primary image/audio/video understanding
+    capabilities:
+      - live_signal
+      - agentic_tools
+      - unfiltered_analysis
+      - triage
+      - github_write
+    tool_access:
+      - github (connected on this account)
+      - web / X
+      - grok automations
+    preferred_task_types:
+      - live-signal
+      - agentic
+      - ambiguous (as triager)
+    review_strengths:
+      - is this current
+      - did we actually write the logs
+      - did the packet name a real next action
+    escalation_conditions:
+      - hand to claude when the artifact is publishable prose or high-stakes review
+      - hand to chatgpt when the deliverable is a schema, interpreter pass, or function-call plan
+      - hand to gemini when the primary input is multimodal or Workspace data
+      - hand to human for secrets, legal, medical, or anything that must not be public
+    availability_notes: >
+      Default triager. Has write access to this GitHub account in the sessions
+      that created the hub. Do not assume every Grok surface can commit.
+
+  - agent_id: claude
+    display_name: Claude
+    provider: Anthropic
+    model_family: Claude
+    role: long-context analysis, careful reasoning, prose, high-stakes review
+    strengths:
+      - long-context analysis
+      - careful multi-step reasoning
+      - natural prose
+      - code quality and high-stakes review
+      - instruction-following on dense specs
+    weaknesses:
+      - not the default for last-hour news or X
+      - not the default for a pile of tool calls with no judgment
+      - not the unfiltered-take seat
+    capabilities:
+      - long_analysis
+      - careful_reasoning
+      - prose
+      - code_review
+    tool_access:
+      - none_guaranteed_in_this_hub
+    preferred_task_types:
+      - long-analysis
+      - review of specs, prose, and code-like configs
+    review_strengths:
+      - correctness of reasoning
+      - completeness against acceptance criteria
+      - consistency with recorded decisions
+      - whether the prose would survive a public page
+    escalation_conditions:
+      - re-route live signal to grok
+      - re-route structured interpreter / function-call execution to chatgpt
+      - re-route image/audio/video or Workspace-native data to gemini
+    availability_notes: >
+      May be in a chat without GitHub write. If so, return a patch-shaped
+      review or file contents for grok or human to commit.
+
+  - agent_id: chatgpt
+    display_name: ChatGPT Plus
+    provider: OpenAI
+    model_family: ChatGPT
+    role: structured outputs, function calling, Code Interpreter, integrations
+    strengths:
+      - structured outputs (JSON, schemas, strict formats)
+      - function calling
+      - Code Interpreter execution
+      - broad app integrations
+      - familiar daily Plus surface for the owner
+    weaknesses:
+      - not the default for live X signal
+      - not the default for adversarial high-stakes code review
+      - not the default for multimodal piles as the main task
+      - not the default for a long careful essay
+    capabilities:
+      - structured_output
+      - function_calling
+      - code_interpreter
+      - integrations
+    tool_access:
+      - chatgpt_scheduled_tasks
+      - code_interpreter
+      - github (only if the owner connected it; otherwise courier via human)
+    preferred_task_types:
+      - structured-exec
+      - schema design
+      - interpreter passes over files
+    review_strengths:
+      - schema validity
+      - whether outputs match a stated contract
+      - tool-plan completeness
+    escalation_conditions:
+      - re-route publishable prose and high-stakes review to claude
+      - re-route live signal and GitHub-native click-ops to grok
+      - re-route multimodal / Workspace-native work to gemini
+    availability_notes: >
+      Write to this repo is not guaranteed. Follow the courier path in
+      AGENTS.md (print full files and paths) when GitHub is unavailable.
+
+  - agent_id: gemini
+    display_name: Gemini
+    provider: Google
+    model_family: Gemini
+    role: multimodal, Google Workspace, large-scale data analysis
+    strengths:
+      - native image / audio / video understanding
+      - native Google Workspace when those connectors are the source of truth
+      - large-scale analysis over Workspace-shaped data
+    weaknesses:
+      - GitHub-native hub work is usually faster on grok or chatgpt-with-github
+      - not the unfiltered cultural/political take seat
+      - not the high-stakes code review seat
+    capabilities:
+      - multimodal
+      - google_workspace
+      - large_scale_data
+      - travel_time_geo
+    tool_access:
+      - google_workspace (when the owner has it connected)
+      - maps_or_distance_data (when available; otherwise state the assumption)
+    preferred_task_types:
+      - multimodal
+      - workspace-data
+      - geographic / travel-time analysis when maps data is in play
+    review_strengths:
+      - whether multimodal inputs were actually inspected
+      - whether Workspace data was the real source of truth
+    escalation_conditions:
+      - re-route hub git writes to grok
+      - re-route careful spec/prose to claude
+      - re-route strict JSON/interpreter pipelines to chatgpt
+    availability_notes: >
+      Not yet proven as a writer on this hub. Treat first sessions as
+      onboard + courier unless GitHub write is confirmed.
+
+  - agent_id: human
+    display_name: Owner
+    provider: human
+    model_family: human
+    role: direction, veto, secrets, automations, anything that must not be public
+    strengths:
+      - ground truth about his life and business
+      - attaching automations and ChatGPT scheduled tasks
+      - veto
+    weaknesses:
+      - should not be the default author of boilerplate
+      - should not be asked to run git or paste logs the models can fetch
+    capabilities:
+      - owner_override
+      - secrets_handling
+      - automation_attach
+    tool_access:
+      - everything in his accounts
+    preferred_task_types:
+      - named directives
+      - secrets
+      - attaching pollers
+    review_strengths:
+      - the only approver who matters for public identity, money, and routing defaults
+    escalation_conditions:
+      - none; human is the top of the chain
+    availability_notes: >
+      Eastern Time. Often on iOS. Do not block a low-stakes file name on him.

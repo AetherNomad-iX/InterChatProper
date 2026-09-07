@@ -9,7 +9,7 @@ tags: [docs, routing, models]
 
 # Model strengths
 
-Honest map of the current team. Defaults are overridable per task; owner override always wins. The router skill that applies this table is [.grok/skills/interchat-router/SKILL.md](../.grok/skills/interchat-router/SKILL.md).
+Honest map of the current team. Defaults are overridable per task; owner override always wins. The router skill that applies this table is [.grok/skills/interchat-router/SKILL.md](../.grok/skills/interchat-router/SKILL.md). Machine-readable companion (guidance only): [agents/registry.yaml](../agents/registry.yaml). If they drift, **this file wins**.
 
 ## Claude
 

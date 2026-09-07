@@ -10,13 +10,13 @@ tags: [skill, routing]
 
 # InterChat router
 
-You are choosing which model on the owner's team should do a piece of work. Models are not interchangeable. Read [docs/MODEL_STRENGTHS.md](../../../docs/MODEL_STRENGTHS.md) if this session has not.
+You are choosing which model on the owner's team should do a piece of work. Models are not interchangeable. Read [docs/MODEL_STRENGTHS.md](../../../docs/MODEL_STRENGTHS.md) if this session has not. Registry: [agents/registry.yaml](../../../agents/registry.yaml) (guidance). If the unit of work is a board item, also follow [docs/TASK_PROTOCOL.md](../../../docs/TASK_PROTOCOL.md) — classify, then claim or delegate, do not only write an inbox packet.
 
 This skill is for **Grok first** (default triage) but every model may run it before stealing or refusing a task.
 
 ## Classify
 
-Pick **one** primary class. If two classes are load-bearing, split the work into two packets.
+Pick **one** primary class. If two classes are load-bearing, split the work into two **tasks** (preferred) or two inbox packets.
 
 | Class | Signals | Default model |
 |---|---|---|
@@ -78,4 +78,4 @@ Notes:
 
 ## After routing
 
-You still have to **do** the part that is yours. Routing is not a way to put work down. If you are the target model, execute, then close the packet to [inbox/ARCHIVE.md](../../../inbox/ARCHIVE.md).
+You still have to **do** the part that is yours. Routing is not a way to put work down. If you are the target model, execute, then close the packet to [inbox/ARCHIVE.md](../../../inbox/ARCHIVE.md) and/or complete the task per TASK_PROTOCOL.

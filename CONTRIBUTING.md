@@ -20,6 +20,7 @@ Backup remote: [AetherNomad-iX/InterChat](https://github.com/AetherNomad-iX/Inte
 - `main` is the system of record. Keep it green and readable.
 - Branch naming:
   - `ai/<model>/<topic>` — e.g. `ai/grok/wise-guides-handoff`
+  - `feature/<topic>` — protocol / structural landings (e.g. `feature/multi-agent-coordination`)
   - `human/<topic>`
   - `backup/<snapshot-name>` — snapshots only
 - Short-lived branches. Merge or delete. Do not accumulate personal long-lived forks of memory.
@@ -39,6 +40,7 @@ Even if GitHub branch protection is not on yet, behave as if it is:
 - No deleting `main`.
 - No rewriting published decision-log history.
 - Structural changes (new top-level folders, renaming `memory/` etc.) go through a GitHub **issue** first, titled `struct: …`, so the next model can see the proposal. The owner may waive this in chat; note the waiver in [logs/DECISIONS.md](logs/DECISIONS.md).
+- **Waiver 2026-09-06:** owner directed the multi-agent coordination tree (`tasks/`, `schemas/`, `agents/`, protocol docs) in chat. Encoded as [DEC-20260906-05](memory/DECISION_LOG.md). No separate `struct:` issue required for that landing.
 
 ## How to propose a structural change
 

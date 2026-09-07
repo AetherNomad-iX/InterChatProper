@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AetherNomad-iX/InterChatProper/schemas/decision.schema.json",
+  "title": "InterChatProper decision",
+  "description": "Formal decision object. Narrative form lives in memory/DECISION_LOG.md; this schema is the field contract for new entries from DEC-20260906-05 onward. Older entries may omit decision_id until backfilled.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision_id",
+    "question",
+    "decision",
+    "rationale",
+    "decided_by",
+    "date",
+    "status"
+  ],
+  "properties": {
+    "decision_id": {
+      "type": "string",
+      "pattern": "^DEC-[0-9]{8}-[0-9]{2}$",
+      "description": "DEC-YYYYMMDD-NN"
+    },
+    "question": { "type": "string" },
+    "context": { "type": "string" },
+    "options_considered": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "decision": { "type": "string" },
+    "rationale": { "type": "string" },
+    "decided_by": {
+      "type": "string",
+      "enum": ["grok", "claude", "chatgpt", "gemini", "human"]
+    },
+    "reviewed_by": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["grok", "claude", "chatgpt", "gemini", "human"]
+      }
+    },
+    "date": { "type": "string", "format": "date" },
+    "related_tasks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "affected_projects": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "supersedes": {
+      "type": ["string", "null"],
+      "description": "decision_id this replaces, if any"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "accepted", "rejected", "superseded", "executed"]
+    }
+  }
+}
